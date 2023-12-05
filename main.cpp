@@ -9,14 +9,12 @@ private:
     std::map<std::string, int> symbolTable;
 
 public:
-    Environment() {}
-
-    void set(std::string var, int val) {
-        symbolTable[var] = val;
+    void insert(std::string symbol, int value) {
+        symbolTable.insert(std::pair<std::string, int>(symbol, value));
     }
 
-    int get(std::string var) {
-        return symbolTable[var];
+    int getSymbol(const std::string& name) {
+        return symbolTable[name];
     }
 };
 
@@ -27,11 +25,11 @@ int main()
 
     Environment env;
 
-    env.set("x", 1);
-    env.set("y", 2);
+    env.insert("x", 10);
+    env.insert("y", 20);
 
-    cout << env.get("x") << endl;
-    cout << env.get("y") << endl;
+    cout << "x es " << env.getSymbol("x") << endl;
+    cout << "y es " << env.getSymbol("y") << endl;
 
     return 0;
 }
