@@ -4,8 +4,6 @@
 #include <stdexcept>
 #include <variant>
 
-using namespace std;
-
 class Environment {
 private:
     std::map<std::string, std::variant<int, double, std::string>> symbolTable;
@@ -32,12 +30,19 @@ public:
         }
         symbolTable.erase(name);
     }
+
+    bool existe(const std::string& name) {
+        if(symbolTable.find(name) != symbolTable.end()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 };
 
 
 int main()
 {
-    cout << "Hello World!" << endl;
 
     Environment env;
 
@@ -57,6 +62,9 @@ int main()
     } catch (const std::runtime_error& e) {
         std::cout << e.what() << std::endl;  // Debería imprimir "Symbol does not exist"
     }
+
+    std::cout << "x existe: " << env.existe("x") << std::endl;
+    std::cout << "w existe: " << env.existe("w") << std::endl;
 
     return 0;
 }
