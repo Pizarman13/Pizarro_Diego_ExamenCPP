@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 
@@ -9,8 +10,11 @@ private:
     std::map<std::string, int> symbolTable;
 
 public:
-    void insert(std::string symbol, int value) {
-        symbolTable.insert(std::pair<std::string, int>(symbol, value));
+    void insert(const std::string& name, int value) {
+        if (symbolTable.find(name) != symbolTable.end()) {
+            throw std::runtime_error("No existe el simbolo");
+        }
+        symbolTable[name] = value;
     }
 
     int lookup(const std::string& name) {
